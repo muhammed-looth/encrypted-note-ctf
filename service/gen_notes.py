@@ -4,8 +4,8 @@ from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes
 from base64 import b64encode
 
-KEYS_DIR = 'keys'
-NOTES_DIR = 'notes'
+KEYS_DIR = '../keys'
+NOTES_DIR = '../notes'
 
 os.makedirs(NOTES_DIR, exist_ok=True)
 
