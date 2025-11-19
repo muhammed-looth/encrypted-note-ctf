@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NoiseField</title>
+<style>
+  @keyframes noise {
+    0%, 100% { background-position: 0 0; }
+    50% { background-position: 100% 100%; }
+  }
+  body {
+    background: repeating-linear-gradient(45deg, #bbb, #333 2px);
+    animation: noise 1s infinite alternate;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    color: white;
+    font-size: 4rem;
+  }
+</style>
+</head>
+<body>
+  NoiseField
+</body>
+</html>

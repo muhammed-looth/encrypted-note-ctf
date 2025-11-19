@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>GlitchZone</title>
+<style>
+  body {
+    background: black;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 5rem;
+    position: relative;
+    color: #0f0;
+    animation: glitch 1s infinite;
+  }
+  @keyframes glitch {
+    0% {
+      text-shadow: 2px 0 red, -2px 0 cyan;
+    }
+    20% {
+      text-shadow: -2px 0 red, 2px 0 cyan;
+    }
+    40% {
+      text-shadow: 2px 2px red, -2px -2px cyan;
+    }
+    60% {
+      text-shadow: -2px 2px red, 2px -2px cyan;
+    }
+    80% {
+      text-shadow: 2px -2px red, -2px 2px cyan;
+    }
+    100% {
+      text-shadow: 2px 0 red, -2px 0 cyan;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>GlitchZone</h1>
+  <img src="" alt="">
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NeonPulse</title>
+<style>
+  body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial Black', sans-serif;
+  }
+  h1 {
+    color: #0ff;
+    font-size: 6rem;
+    text-shadow:
+      0 0 10px #0ff,
+      0 0 20px #0ff,
+      0 0 30px #0ff,
+      0 0 40px #0ff,
+      0 0 50px #0ff;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { text-shadow: 0 0 10px #0ff; }
+    50% { text-shadow: 0 0 30px #0ff, 0 0 40px #0ff, 0 0 70px #0ff; }
+  }
+</style>
+</head>
+<body>
+  <h1>NeonPulse</h1>
+</body>
+</html>
