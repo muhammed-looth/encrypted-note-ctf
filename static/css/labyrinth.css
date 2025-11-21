@@ -1,0 +1,79 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.maze-bg {
+    background: radial-gradient(circle at 60% 30%, #111 0%, #222 80%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.labyrinth-container {
+    background: #181826cc;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px #000a;
+    padding: 40px 52px;
+    text-align: center;
+}
+.maze {
+    margin: 40px 0;
+    display: grid;
+    grid-template-rows: repeat(5, 38px);
+    grid-gap: 0;
+}
+.maze-row {
+    display: grid;
+    grid-template-columns: repeat(5, 38px);
+}
+.wall {
+    background: #050505;
+    border: 2px solid #2e2e2e;
+    border-radius: 6px;
+    display: block;
+    width: 36px;
+    height: 36px;
+}
+.path {
+    background: #302f35;
+    border: 2px solid #525252;
+    border-radius: 6px;
+    display: block;
+    width: 36px;
+    height: 36px;
+}
+.intro {
+    color: #adadff;
+    margin-bottom: 18px;
+    font-size: 1.14em;
+}
+.hidden-key {
+    color: #181826; /* Almost pure black, almost invisible unless highlighted */
+    background: #181826;
+    user-select: text;
+    font-size: 0.98em;
+}
+.hint-box {
+    margin-top: 28px;
+    font-style: italic;
+    color: #ffeeee;
+    font-size: 1em;
+    display: none;
+}
+
+button {
+    background: #2222aa;
+    color: #fff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    box-shadow: 0 3px 9px #0005;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+button:hover {
+    background: #3333ee;
+}

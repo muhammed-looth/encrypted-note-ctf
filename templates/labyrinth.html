@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Labyrinth</title>
-<style>
-  body {
-    background: #623a2f;
-    color: #e2d6c7;
-    font-family: 'Times New Roman', serif;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 10px;
-    padding: 50px;
-  }
-  div {
-    background: #754c35;
-    border: 2px solid #bda085;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.5rem;
-    box-shadow: inset 0 0 10px #000;
-    cursor: pointer;
-    user-select: none;
-  }
-  div:hover {
-    background: #bda085;
-    color: #623a2f;
-  }
-</style>
+    <meta charset="UTF-8" />
+    <title>Labyrinth Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/labyrinth.css') }}" />
 </head>
 <body>
-  <div>LA</div>
-  <div>BY</div>
-  <div>RIN</div>
-  <div>TH</div>
-  <div>...</div>
-  <div>...</div>
-  <div>...</div>
-  <div>...</div>
-  <div>...</div>
-  <div>...</div>
+    <div class="maze-bg">
+        <div class="labyrinth-container">
+            <h1>Welcome to the Labyrinth</h1>
+            <p class="intro">
+                Find your way through the twisting paths.<br>
+                Somewhere in the shadows lies a secret...
+            </p>
+            <div class="maze">
+                <div class="maze-row">
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                </div>
+                <div class="maze-row">
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                </div>
+                <div class="maze-row">
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <!-- Hidden black-on-black KEY PART below: -->
+                    <span class="hidden-key">IZBVUVCZKBLE2TSBG5BEYL32GR4EKMTWJVTFGLZTPI2UUMTGKE3EMR2ZHFAVQRKWGNDXSL<br>2CJ4ZXQS2QORUE4WDIPFTFOMJWIRIWQQQKJBAUU2KVNMVVUWDHLBMHEZLMN5TU44SCN5KHO2DVM5VXIQRQMFM<br>EOY2KJ5CXERCLGFRUCMJLMFXE2VDCKF5DK5LFJRXXIS2UORHEMNQKIM2XCVCBGZDWWUCSOVSWW2TJJJS<br>EIZCQKZYWOM2NN5JWYT3YOYVUKZJQJFRU6QK2KZAXK3TXGVNFUMSMMN3U46CYME4WQTDUNVWECUI=</span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                </div>
+                <div class="maze-row">
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                </div>
+                <div class="maze-row">
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                    <span class="path"></span>
+                    <span class="wall"></span>
+                </div>
+            </div>
+            <button onclick="hint()">Need a hint?</button>
+            <div id="hint-box" class="hint-box"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/labyrinth.js') }}"></script>
 </body>
 </html>

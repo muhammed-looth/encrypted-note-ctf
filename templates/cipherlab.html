@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CipherLab</title>
-<style>
-  body {
-    background-color: #0e2f0e;
-    color: #70ff70;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    padding-top: 150px;
-  }
-  h1 {
-    font-size: 5rem;
-    letter-spacing: 0.5em;
-    text-shadow: 0 0 5px #00ff00;
-    text-transform: uppercase;
-  }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cipherlab.css') }}">
 </head>
 <body>
-  <h1>CIPHERLAB</h1>
+<header>
+<h1>Welcome to CipherLab</h1>
+<p>A mini CTF challenge awaits you.</p>
+</header>
+
+
+<section class="challenge-box">
+<h2>Find the Hidden Key</h2>
+<p>Somewhere in this page lies a secret hex key. Can you find it?</p>
+</section>
+
+
+<footer>
+<p>Good luck, hacker!</p>
+</footer>
+
+
+<script src="{{ url_for('static', filename='js/cipherlab.js') }}"></script>
 </body>
 </html>
