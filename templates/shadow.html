@@ -1,24 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-<meta charset="UTF-8" />
-<title>ShadowNet</title>
-<style>
-  body {
-    background: #181818;
-    color: #ddd;
-    font-family: 'Georgia', serif;
-    text-align: center;
-    padding-top: 150px;
-    text-shadow: 3px 3px 10px #000;
-  }
-  h1 {
-    font-size: 5rem;
-    text-shadow: 5px 5px 15px rgba(0,0,0,0.8);
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shadow Puzzle | CTF Challenge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/shadow.css') }}" />
 </head>
 <body>
-  <h1>ShadowNet</h1>
+  <div class="shadow-container">
+    <h1 class="title">Welcome to the Shadow Realm</h1>
+    <p class="instructions">A secret key is hidden in the shadows.<br>Explore carefully with your mouse.</p>
+
+    <div id="shadowArea" class="shadow-area" title="Explore the darkness..."></div>
+
+    <div id="keyReveal" class="key-reveal" style="display:none;">
+      👤 You found the shadow’s secret! 👤<br/>
+      <code>LS0tLUJFR0lOIFBSSVZBVEUgS0VZLS0tLS0KTUlJRXZ3SUJBREFOQmdrcWhraUc5dzBCQV<br>FFRkFBU0NCS2t3Z2dTbEFnRUFBb0lCQVFEUUJPZWpydnJUTVFlagowcno5OEI1Mmpod2lS<br>Tk5leThDYmplRE9rVGQrR0V5Nk5zK0orc3RWbjUycE1iMFAxWTdTYkFNalF0TjJVZUd1</code>
+    </div>
+  </div>
+
+  <script>
+    const shadowArea = document.getElementById('shadowArea');
+    const keyReveal = document.getElementById('keyReveal');
+
+    shadowArea.addEventListener('mousemove', (e) => {
+      const rect = shadowArea.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Specific dark “shadow hotspot” to reveal
+      if (
+        x > rect.width * 0.3 && x < rect.width * 0.5 &&
+        y > rect.height * 0.55 && y < rect.height * 0.75
+      ) {
+        keyReveal.style.display = "block";
+      } else {
+        keyReveal.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>MirrorWorld</title>
-<style>
-  body {
-    background: #111;
-    color: #fff;
-    font-family: 'Arial Black', Gadget, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  h1 {
-    font-size: 6rem;
-    transform: scaleX(-1);
-    text-shadow: 2px 2px 5px #000;
-  }
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mirror Puzzle | CTF Challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mirror.css') }}" />
 </head>
 <body>
-  <h1>MirrorWorld</h1>
+    <div class="container">
+      <h1>Mirror Puzzle</h1>
+      <p class="instructions">A part of the key is hidden in the reflection.<br>Explore, hover, and click carefully.</p>
+      <div class="mirror-wrapper">
+          <div class="original-image" title="original image"></div>
+          <div class="mirror-image" title="mirror image"></div>
+
+          <!-- Invisible clickable shard hidden in reflection -->
+          <div id="shard" class="mirror-shard" title="Hidden shard"></div>
+      </div>
+      <div id="keyReveal" class="key-reveal" style="display:none;">
+        <p>✨ You found the hidden shard! ✨</p>
+        <h2>Key Part 4: <code>  {   T2mqqzyUSfzIH1e73kL2YKuOHZzgHux03jdL5DQs5TyG%2BV6jQkL3VzqEWz127y9C%0AjfqBxEU1AgMBAAECggEAB7aG2DzetAH3ZI2l0Eyc9IxkYqjmpXcslxf1o%2FMieZxx%0AC96IZ3dTHsOiVumvNu0WNJsoqqAJszNqCMhae3D253JusZ8T5C1zK%2FHQP2UJrDdW    }</code></h2>
+      </div>
+    </div>
+    <script>
+      const shard = document.getElementById('shard');
+      const keyReveal = document.getElementById('keyReveal');
+      shard.addEventListener('click', () => {
+        keyReveal.style.display = 'block';
+        shard.style.display = 'none';
+      });
+    </script>
 </body>
 </html>
+

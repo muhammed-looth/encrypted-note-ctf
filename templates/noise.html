@@ -1,28 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>NoiseField</title>
-<style>
-  @keyframes noise {
-    0%, 100% { background-position: 0 0; }
-    50% { background-position: 100% 100%; }
-  }
-  body {
-    background: repeating-linear-gradient(45deg, #bbb, #333 2px);
-    animation: noise 1s infinite alternate;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: monospace;
-    color: white;
-    font-size: 4rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noise Puzzle | CTF Challenge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/noise.css') }}" />
 </head>
 <body>
-  NoiseField
+  <div class="noise-container">
+    <h1>Static Noise Challenge</h1>
+    <p>Amidst the chaos lies a secret signal. Find the noise that reveals the key.</p>
+    <canvas id="noiseCanvas"></canvas>
+    <div id="signalSpot" title="Click me if you can find me!"></div>
+    <div id="keyReveal" class="key-reveal" style="display:none;">
+      🎯 Signal locked in! <br/>
+      <code>   00110101 01001101 01001011 01000100 01010101 01010001 00110010 01001000 01101011 00110000 00111001 01101000 01001000 01100001 01111001 01001010 01100010 00101111 01110001 00110100 00101111 01111001 01101010 01110001 01101000 01101011 00110101 00110000 01010010 01000010 01111010 01010101 01010100 01111001 01110100 01000011 00110111 00110101 01000101 01000101 01110001 01010001 01001011 01000010 01100111 01010001 01000100 00110001 01010000 01110111 00101111 01010011 01001110 01010001 01010000 00101011 01111000 01100100 00110110 01110110 00110101 01001001 01110111 01110010 00001010 01111000 00101111 01100100 00101011 01101010 01011010 00110010 01101111 01000010 01010100 01011010 01001100 01000100 01100100 00110101 01100110 01000101 01101011 01010000 01000001 01110111 01101100 01100001 00101111 01101001 01001010 00110101 01111000 00110111 00110110 00111000 01110011 01100010 00110100 01101110 00101111 01010001 01110110 01100001 00101011 00111001 01011010 01000100 00111001 01110111 01111000 01001111 01101000 01101011 00110011 01001100 01010110 01010100 01111000 00111001 01011010 01101100 01101001 01000101 01110111 00101111 01101001 01010101 01000111 00001010 01100111 00110101 01010010 00110010 01000100 00101011 01110011 00111001 01000010 00110110 01110001 01010010 01100011 00110010 01010011 01001101 01011010 01101000 01000100 00111000 01010000 01110100 01010110 00110100 00110001 01001110 00110101 01010001 01010100 01000111 01000100 00111001 01100100 00101111 01100101 01100111 01011001 01010101 01001100 00110101 00110110 01001001 01111000 01101010 01000101 00110010 01111000 01111000 01111010 01100100 01111001 01101110 01000111 00110100 01101001 01110001 01010100 01000110 00110001 01000111 00110100 01110000 01110110 01001100   </code>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('noiseCanvas');
+    const ctx = canvas.getContext('2d');
+    const signalSpot = document.getElementById('signalSpot');
+    const keyReveal = document.getElementById('keyReveal');
+
+    // Canvas size to fill viewport
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.7;
+      positionSignal();
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Paint noise (static effect)
+    function generateNoise() {
+      let imageData = ctx.createImageData(canvas.width, canvas.height);
+      let pixels = imageData.data;
+
+      for (let i = 0; i < pixels.length; i += 4) {
+        const v = Math.random() * 255;
+        pixels[i] = pixels[i+1] = pixels[i+2] = v;  // grayscale noise
+        pixels[i+3] = 255;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    // Animate noise
+    function noiseLoop() {
+      generateNoise();
+      requestAnimationFrame(noiseLoop);
+    }
+    noiseLoop();
+
+    // Position the elusive signal spot randomly every few seconds
+    function positionSignal() {
+      const maxX = canvas.width - 40;
+      const maxY = canvas.height - 40;
+      signalSpot.style.left = Math.floor(Math.random() * maxX) + 'px';
+      signalSpot.style.top = Math.floor(Math.random() * maxY + window.innerHeight * 0.15) + 'px';
+    }
+
+    setInterval(positionSignal, 3000);  // signal moves every 3 seconds
+
+    // Reveal key on signal spot click
+    signalSpot.addEventListener('click', () => {
+      keyReveal.style.display = 'block';
+      signalSpot.style.display = 'none';
+    });
+  </script>
 </body>
 </html>

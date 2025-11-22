@@ -1,0 +1,79 @@
+body {
+    background: radial-gradient(ellipse at center,#232526 0%,#303030 100%);
+    color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Ubuntu', monospace, Arial, sans-serif;
+}
+.maze-container {
+    padding: 32px;
+    border-radius: 24px;
+    background: rgba(40,42,54,0.94);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.55), 0 1.5px 6px #4caf50;
+    text-align: center;
+    min-width: 430px;
+}
+h1 {
+    color: #4caf50;
+    font-size: 2.4rem;
+}
+.challenge-text {
+    font-size: 1.12rem;
+    margin-bottom: 26px;
+    color: #b8ffa8;
+}
+.maze-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 2.1em);
+    grid-template-rows: repeat(10, 2.1em);
+    gap: 0.12em;
+    justify-content: center;
+    margin: 0 auto;
+    border: 2.5px solid #444;
+    background: #232627;
+    border-radius: 7px;
+    width: fit-content;
+}
+.cell {
+    width: 2em;
+    height: 2em;
+    border-radius: 4px;
+    background: #313131;
+    box-shadow: 0 2px 3px rgba(20,20,20,0.11);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.22s;
+}
+.wall {
+    background: repeating-linear-gradient(135deg, #171a23 0, #373c48 6px, #171a23 12px );
+}
+.start {
+    background: #234;
+    border: 2px solid #71ffbe;
+}
+.exit {
+    background: #1b4929;
+    border: 2px solid #4caf50;
+}
+.player {
+    background: radial-gradient(circle,#ffd700 60%,#f8f707 100%);
+    border: 2px solid #fa0;
+    box-shadow: 0 0 10px 2px #ffe14f, 0 2px 8px 1px #b3a122;
+}
+.hidden-key {
+    display: none;
+    margin-top: 36px;
+    font-size: 1.23rem;
+    font-weight: bold;
+    color: #13ff59;
+    background: #161c13;
+    padding: 18px 26px;
+    border-radius: 10px;
+    border: 1.5px solid #3cc663;
+    box-shadow: 0 2px 12px #39a76b2e;
+    word-break: break-all;
+    user-select: all;
+}

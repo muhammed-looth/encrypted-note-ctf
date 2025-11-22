@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
+body {
+  margin: 0;
+  background: #050505;
+  color: #ddd;
+  font-family: 'UnifrakturCook', cursive, 'Arial Black', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  user-select: none;
+  text-align: center;
+}
+
+.shadow-container {
+  max-width: 700px;
+  padding: 45px 30px 60px;
+  background: radial-gradient(circle at center, #1a1a1a, #000000 90%);
+  border-radius: 20px;
+  box-shadow: 
+    inset 0 0 180px 40px #000000cc,
+    0 0 40px 15px #111111cc;
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 3.8rem;
+  color: #777777;
+  text-shadow: 0 0 15px #444444;
+  margin-bottom: 20px;
+  user-select: text;
+}
+
+.instructions {
+  font-size: 1.25rem;
+  color: #555555cc;
+  margin-bottom: 40px;
+  font-style: italic;
+  user-select: text;
+}
+
+.shadow-area {
+  position: relative;
+  width: 500px;
+  height: 320px;
+  margin: 0 auto;
+  border-radius: 25px;
+  background:
+    radial-gradient(
+      circle at 40% 65%, 
+      rgba(0, 0, 0, 0.95) 0%, 
+      rgba(40, 40, 40, 0.8) 60%, 
+      rgba(25, 25, 25, 0.6) 85%,
+      rgba(20, 20, 20, 0.7) 100%
+    );
+  box-shadow:
+    inset 30px -20px 60px 15px #000000b0,
+    0 0 50px 10px #101010cc;
+  cursor: crosshair;
+}
+
+.key-reveal {
+  margin-top: 36px;
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #aaaaaa;
+  background-color: #121212cc;
+  padding: 22px 34px;
+  border-radius: 18px;
+  text-shadow: 0 0 18px #888888cc;
+  user-select: text;
+  box-shadow:
+    0 0 35px #888888aa,
+    inset 0 0 23px 8px #bbbbbb55;
+  letter-spacing: 2px;
+  transition: opacity 0.3s ease;
+}

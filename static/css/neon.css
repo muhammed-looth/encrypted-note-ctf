@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+body {
+  background-color: #0a0a0a;
+  color: #0ff;
+  font-family: 'Monoton', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
+  flex-direction: column;
+  text-align: center;
+}
+
+.neon-container {
+  padding: 40px 20px;
+  max-width: 600px;
+  border-radius: 18px;
+  background: #001a33;
+  box-shadow: 0 0 35px #00ffffcc, inset 0 0 25px #00ffffbb;
+  animation: pulseGlow 3s infinite alternate ease-in-out;
+}
+
+.neon-title {
+  font-size: 3.8rem;
+  color: #00fff7;
+  text-shadow:
+    0 0 6px #00fff7, 
+    0 0 12px #00fff7, 
+    0 0 18px #00fff7, 
+    0 0 24px #00b4af, 
+    0 0 30px #00b4af;
+  margin-bottom: 10px;
+  user-select: text;
+}
+
+.neon-instructions {
+  font-size: 1.4rem;
+  color: #66ffffcc;
+  margin-bottom: 30px;
+  user-select: text;
+}
+
+.neon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  grid-gap: 18px;
+  justify-content: center;
+}
+
+.neon-block {
+  background: #000;
+  border-radius: 14px;
+  box-shadow:
+    0 0 12px #11ffffaa,
+    inset 0 0 10px #00ffe5;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #00ffd6;
+  line-height: 70px;
+  text-align: center;
+  cursor: default;
+  user-select: none;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+  filter: drop-shadow(0 0 2px #00ffffaa);
+  outline: none;
+}
+
+.neon-block.secret {
+  filter: brightness(0.8);
+  cursor: pointer;
+  position: relative;
+  animation: flickerLight 3.5s infinite;
+}
+
+.neon-block.secret:hover, 
+.neon-block.secret:focus {
+  filter: brightness(1) drop-shadow(0 0 15px #00ffee);
+  box-shadow:
+    0 0 25px #00ffee,
+    inset 0 0 15px #00eeff;
+}
+
+.secret-key {
+  font-size: 1.7rem;
+  margin-top: 36px;
+  color: #00ffd6;
+  font-weight: 700;
+  user-select: text;
+  text-shadow: 0 0 18px #00ffebbb;
+  border: 2px solid #00ffeedd;
+  background-color: #002a4d88;
+  padding: 18px 30px;
+  border-radius: 15px;
+  animation: lightGlow 2.5s infinite alternate;
+}
+
+/* Animations */
+
+@keyframes flickerLight {
+  0%, 100% { filter: brightness(0.8) drop-shadow(0 0 10px #00ffee); }
+  50% { filter: brightness(1.1) drop-shadow(0 0 20px #00fffee7); }
+}
+
+@keyframes pulseGlow {
+  from {
+    box-shadow:
+      0 0 20px #00ffffcc,
+      inset 0 0 15px #00ffffcc;
+  }
+  to {
+    box-shadow:
+      0 0 45px #00fffbcc,
+      inset 0 0 30px #00fffbcc;
+  }
+}
+
+@keyframes lightGlow {
+  0% { text-shadow: 0 0 8px #00ffebbb; background-color: #001f3d99; }
+  100% { text-shadow: 0 0 18px #00ffd6ff; background-color: #003f71bb; }
+}
