@@ -1,61 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Labyrinth Challenge</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/labyrinth.css') }}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Labyrinth Challenge | CTF</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/labyrinth.css') }}" />
 </head>
 <body>
-    <div class="maze-bg">
-        <div class="labyrinth-container">
-            <h1>Welcome to the Labyrinth</h1>
-            <p class="intro">
-                Find your way through the twisting paths.<br>
-                Somewhere in the shadows lies a secret...
-            </p>
-            <div class="maze">
-                <div class="maze-row">
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                </div>
-                <div class="maze-row">
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                </div>
-                <div class="maze-row">
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <!-- Hidden black-on-black KEY PART below: -->
-                    <span class="hidden-key">IZBVUVCZKBLE2TSBG5BEYL32GR4EKMTWJVTFGLZTPI2UUMTGKE3EMR2ZHFAVQRKWGNDXSL<br>2CJ4ZXQS2QORUE4WDIPFTFOMJWIRIWQQQKJBAUU2KVNMVVUWDHLBMHEZLMN5TU44SCN5KHO2DVM5VXIQRQMFM<br>EOY2KJ5CXERCLGFRUCMJLMFXE2VDCKF5DK5LFJRXXIS2UORHEMNQKIM2XCVCBGZDWWUCSOVSWW2TJJJS<br>EIZCQKZYWOM2NN5JWYT3YOYVUKZJQJFRU6QK2KZAXK3TXGVNFUMSMMN3U46CYME4WQTDUNVWECUI=</span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                </div>
-                <div class="maze-row">
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                </div>
-                <div class="maze-row">
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>
-                    <span class="path"></span>
-                    <span class="wall"></span>t
-                </div>
-            </div>
-            <button onclick="hint()">Need a hint?</button>
-            <div id="hint-box" class="hint-box"></div>
-        </div>
+  <div class="labyrinth-container">
+    <h1 class="title">Enter the Labyrinth</h1>
+    <p class="instructions">Navigate the shifting maze, find 3 hidden glyphs, and decode the obfuscated key.<br>Time is running out...</p>
+    
+    <div class="timer-display">
+      <span id="timer">Time: 180s</span>
     </div>
-    <script src="{{ url_for('static', filename='js/labyrinth.js') }}"></script>
+    
+    <canvas id="labyrinthCanvas" width="600" height="600"></canvas>
+    
+    <div class="glyph-tracker">
+      <p>Glyphs Found: <span id="glyphCount">0/3</span></p>
+      <div id="glyphHints" style="display:none;">
+        <p class="hint-text">🔑 Partial Key Revealed: <code id="partialKey"></code></p>
+      </div>
+    </div>
+
+    <div id="finalKey" class="final-key" style="display:none;">
+      🎉 Labyrinth Conquered! 🎉<br>
+      <code>Hidden key Part (2):    IZBVUVCZKBLE2TSBG5BEYL32GR4EKMTWJVTFGLZTPI2UUMTGKE3EMR2ZHFAVQRKWGNDXSL2CJ4ZXQS2QORUE4WDIPFTFOMJWIRIWQQQKJBAUU2KVNMVVUWDHLBMHEZLMN5TU44SCN5KHO2DVM5VXIQRQMFMEOY2KJ5CXERCLGFRUCMJLMFXE2VDCKF5DK5LFJRXXIS2UORHEMNQKIM2XCVCBGZDWWUCSOVSWW2TJJJSEIZCQKZYWOM2NN5JWYT3YOYVUKZJQJFRU6QK2KZAXK3TXGVNFUMSMMN3U46CYME4WQTDUNVWECUI=   </code>
+    </div>
+  </div>
+
+  <!-- Obfuscated hint in comment -->
+  <!-- Z2x5cGhfMTogY2xpY2tfdGhlX2NvcmVfb2ZfZGFya25lc3M= -->
+  <!-- Z2x5cGhfMjogaG92ZXJfb3Zlcl90aGVfZWRnZV9vZl9zaGFkb3dz -->
+  <!-- Z2x5cGhfMzogcHJlc3Nfc3BhY2ViYXJfd2hlbl9sYWJ5cmludGhfc3BpbnM= -->
+  
+  <script src="{{ url_for('static', filename='js/labyrinth.js') }}"></script>
 </body>
 </html>

@@ -24,3 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // TODO: Add real send message to server code here (e.g., fetch or socket)
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chatBox = document.getElementById('chatBox');
+    if(chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+});

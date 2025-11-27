@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leaked Chat Logs</title>
+  <style>
+    body { font-family: monospace, monospace; background: #111; color: #0f0; padding: 20px; max-width: 700px; margin: auto; }
+    h1 { text-align: center; }
+    #leakedLogs {
+      background: #000;
+      border: 2px solid #0f0;
+      padding: 15px;
+      height: 400px;
+      overflow-y: scroll;
+      white-space: pre-wrap;
+      user-select: text;
+      box-shadow: 0 0 15px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Intercepted Chat Logs</h1>
+  <div id="leakedLogs"></div>
+  <script>
+    // Simulated intercepted chat logs content (this could be dynamically loaded from server)
+    const leakedMessages = [
+      "[12:01:23] User1: Hey Bob, its me charlie",
+      "[12:01:27] User2: YO charliee whats up.",
+      "[12:02:10] User1: I think someone is spying me, i think something is going to happen to me",
+      "[12:02:15] User2: Hey bro calm down, i am here with you",
+      "[12:05:00] User1: plese listen carefully, i have a very important datas, if this data and its secret key gets in a wrong hands, the world is going to end",
+      "[12:05:05] User1: i couriered a drive to you with that data, keep it safe bro, it is not longewr safe with me",
+        "[12:06:30] User2: just got the drive, thanks bro",
+        "[12:06:32] User2: yo bor how can i find the secret key?",
+        "[12:06:40] User1: the key is splitted into 10 parts, you need to find all parts to reconstruct the key",
+        "[12:06:45] User1: i have hidden those parts in various puzzles around my we server, you need to solve those puzzles to get the key parts",
+        "[12:06:50] User1: be careful bro, there are people who are after that key too",
+        "[12:06:55] User2: bro i will be careful, but what is the order the splitted key parts?",
+        "[12:07:00] User1: try my phone number as the order",
+        "[12:06:30] User2: this is our last chat bro, stay safe, dont call me again",
+      "[12:07:10] MITM-Attacker: (Intercepted) Secret code leaked above!",
+    ];
+
+    const logsDiv = document.getElementById('leakedLogs');
+    logsDiv.textContent = leakedMessages.join('\n');
+  </script>
+</body>
+</html>
