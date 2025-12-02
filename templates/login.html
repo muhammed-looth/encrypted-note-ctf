@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login | Secure CTF</title>
-    <link rel="stylesheet" href="/static/css/styles.css" />
+    <title>FSOCIETY AUTH</title>
+    <link rel="stylesheet" href="/static/css/login.css" />
 </head>
 <body>
-    <div class="container form-container">
-        <h2>Login</h2>
-        <form method="POST" id="loginForm">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter username" required />
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter password" required />
-            </div>
-            <button type="submit" class="btn">Log In</button>
-            <p class="switch-text">Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="scanline"></div>
+
+    <div class="container">
+        <h1 class="glitch" data-text="MATRIX">MATRIX</h1>
+        <p class="subtitle">ACCESS REQUIRED</p>
+
+        <form method="POST" id="loginForm" class="login-box">
+            <label>USER</label>
+            <input type="text" id="username" name="username" autocomplete="off" required>
+
+            <label>PASSWORD</label>
+            <input type="password" id="password" name="password" autocomplete="off" required>
+
+            <button class="btn" type="submit">ENTER</button>
         </form>
     </div>
-    <script src="/static/js/script.js"></script>
+
+    <audio id="typeSound" src="/static/audio/type.wav"></audio>
+    
+    <script src="/static/js/login.js"></script>
 </body>
 </html>
-<!-- {{ url_for('static', filename='js/script.js') }} -->
-  <!-- {{ url_for('static', filename='css/style.css') }} -->

@@ -35,32 +35,23 @@ with app.app_context():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/signup', methods=["GET", "POST"])
-def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if User.query.filter_by(username=username).first():
-            flash('Username exists!')
-            return redirect(url_for('signup'))
-        user = User(username=username, password=generate_password_hash(password))
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('login'))
-    return render_template('signup.html')
 
-@app.route('/', methods=["GET", "POST"])
+VALID_USERNAME = "charlie"
+VALID_PASSWORD = "password@321"  # make it strong
+
+@app.route("/", methods=["GET", "POST"])
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        if user and check_password_hash(user.password, password):
-            login_user(user)
-            return redirect(url_for('blog'))
-        else:
-            flash('Invalid credentials!')
-    return render_template('login.html')
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == VALID_USERNAME and password == VALID_PASSWORD:
+            return redirect("/blog")  # or your secret page
+
+        flash("ACCESS DENIED — INVALID CREDENTIALS")
+        return redirect("/")
+
+    return render_template("login.html")
 
 @app.route('/blog')
 @login_required

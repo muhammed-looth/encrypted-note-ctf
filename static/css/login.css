@@ -1,58 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-margin: 0;
-height: 100vh;
-background: radial-gradient(circle, #0d0d0d, #000);
-display: flex;
-align-items: center;
-justify-content: center;
-font-family: 'Courier New', monospace;
-color: #00ffc3;
+    background: black;
+    overflow: hidden;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ffe6;
 }
 
-
-.login-container {
-text-align: center;
-width: 350px;
+canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-
-.title {
-font-size: 2.5rem;
-text-shadow: 0 0 15px #00ffc3;
+/* Scanline effect */
+.scanline {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        transparent,
+        rgba(0, 255, 0, 0.05) 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    animation: flicker 3s infinite;
 }
 
+@keyframes flicker {
+    0%, 19%, 22%, 60%, 64%, 100% { opacity: 0.9; }
+    20%, 21%, 63% { opacity: 0; }
+}
 
+/* Center container */
+.container {
+    position: relative;
+    z-index: 10;
+    width: 350px;
+    margin: auto;
+    top: 20vh;
+    text-align: center;
+}
+
+/* Glitch Title */
+.glitch {
+    font-size: 3rem;
+    letter-spacing: 4px;
+    animation: glitch 1.5s infinite;
+}
+
+.glitch:before, .glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    mix-blend-mode: multiply;
+}
+
+.glitch:before {
+    color: red;
+    animation: glitch-2 1.3s infinite;
+}
+
+.glitch:after {
+    color: cyan;
+    animation: glitch-3 1.7s infinite;
+}
+
+/* Animations */
+@keyframes glitch {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(3deg); }
+  40% { transform: skew(-3deg); }
+  60% { transform: skew(2deg); }
+  80% { transform: skew(-2deg); }
+  100% { transform: skew(0deg); }
+}
+
+/* Form styling */
 .login-box {
-display: flex;
-flex-direction: column;
-gap: 15px;
-margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 12px;
 }
 
-
-.login-box input {
-padding: 12px;
-border: none;
-background: #111;
-color: #00ffc3;
-border-radius: 6px;
-outline: none;
-box-shadow: 0 0 10px #00ffc350;
+input {
+    padding: 13px;
+    border: 1px solid #00ffe6;
+    background: rgba(0, 0, 0, 0.6);
+    color: #00ffe6;
+    text-shadow: 0px 0px 5px #00ffee;
+    outline: none;
+    transition: 0.2s;
 }
 
-
-.login-box button {
-padding: 12px;
-border: none;
-background: #00ffc3;
-color: #000;
-font-weight: bold;
-border-radius: 6px;
-cursor: pointer;
-transition: 0.3s;
+input:focus {
+    box-shadow: 0 0 15px #00ffe6;
 }
 
+.btn {
+    padding: 12px;
+    border: none;
+    background: #00ffe6;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-.login-box button:hover {
-background: #00cfa0;
+.btn:hover {
+    box-shadow: 0 0 20px #00ffe6;
+}
+
+.hint {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+a {
+    color: #ff003b;
+    text-decoration: none;
 }
