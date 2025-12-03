@@ -45,7 +45,7 @@ function move(dx,dy){
         const keyBox = document.getElementById('hidden-key');
         keyBox.style.display="block";
         keyBox.textContent =
-            "Key Fragment (03):  ⚠️ 70 4f 69 6f 75 63 35 5a 34 52 4f 68 50 4a 76 30 4c 71 4c 30 58 7a 42 61 58 50 52 6c 6f 4d 62 6d 37 58 4d 61 61 34 62 64 79 4c 51 42 78 33 4e 39 57 68 43 64 43 39 7a 73 6d 39 75 49 42 35 46 53 0a 57 61 76 38 4c 45 6a 57 37 68 67 6a 39 49 4c 41 56 4c 72 44 6f 2f 78 48 63 5a 79 2f 63 42 4c 65 37 46 46 54 5a 53 6b 76 4c 43 4d 44 67 64 69 76 36 33 47 79 36 53 2f 55 36 39 31 58 63 45 49 47 0a 2f 47 6a 6c 75 6a 6a 52 68 52 30 63 66 49 48 4f 55 32 4f 59 37 72 39 34 34 70 52 5a 5a 6a 34 76 6d 51 4f 73 6a 45 43 79 59 41 50 79 4d 6c 48 75 35 59 64 78 70 69 76 59 51 38 4c 47 67 4d 33 64  ---|---   Next Challenge: https://encrypted-note-ctf.onrender.com/bcc4d4f0381c74919db335641dc13b085bf1d0fd    ";
+            "Key Fragment (03):  ⚠️ 70 4f 69 6f 75 63 35 5a 34 52 4f 68 50 4a 76 30 4c 71 4c 30 58 7a 42 61 58 50 52 6c 6f 4d 62 6d 37 58 4d 61 61 34 62 64 79 4c 51 42 78 33 4e 39 57 68 43 64 43 39 7a 73 6d 39 75 49 42 35 46 53 0a 57 61 76 38 4c 45 6a 57 37 68 67 6a 39 49 4c 41 56 4c 72 44 6f 2f 78 48 63 5a 79 2f 63 42 4c 65 37 46 46 54 5a 53 6b 76 4c 43 4d 44 67 64 69 76 36 33 47 79 36 53 2f 55 36 39 31 58 63 45 49 47 0a 2f 47 6a 6c 75 6a 6a 52 68 52 30 63 66 49 48 4f 55 32 4f 59 37 72 39 34 34 70 52 5a 5a 6a 34 76 6d 51 4f 73 6a 45 43 79 59 41 50 79 4d 6c 48 75 35 59 64 78 70 69 76 59 51 38 4c 47 67 4d 33 64  ---|---   Next Challenge: https://encrypted-note-ctf.onrender.com/357de8f622ff2aaeb5073eabcb4b770be81cb56a   ";
           
     }
 }
