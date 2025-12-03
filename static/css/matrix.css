@@ -3,7 +3,7 @@ body {
     font-family: "Courier New";
     color: #00ff95;
     text-shadow: 0 0 8px #00ff95;
-    user-select: none;
+    user-select: text;
 }
 
 .scanlines::before {
