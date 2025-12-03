@@ -1,95 +1,72 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: black;
-    color: #00ff9f;
-    font-family: "Courier New", monospace;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    background: #000;
+    font-family: "Courier New";
+    color: #00ff95;
+    text-shadow: 0 0 8px #00ff95;
+    user-select: none;
 }
 
-#terminal {
-    width: 80%;
-    max-width: 900px;
-    border: 2px solid #00ff9f;
-    padding: 20px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 30px #00ff9f70;
+.scanlines::before {
+    content:"";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(transparent 0px, rgba(0,255,149,0.05) 2px, transparent 4px);
+    pointer-events: none;
+    opacity: 0.2;
 }
 
-.blink {
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% {opacity: 0;}
-}
-
-.title { font-size: 2.2rem; margin-bottom: 8px;}
-.subtitle { font-size: 1rem; margin-bottom: 15px; opacity: 0.7; }
-
-hr {
-    border: none;
-    border-bottom: 1px dashed #00ff9f;
-    margin: 20px 0;
-}
-
-.reveal {
-    color: #00ffaa;
-    text-shadow: 0 0 10px #00ffaa;
-    animation: typeIn 2s steps(20) forwards;
-    opacity: 0;
-}
-
-@keyframes typeIn {
-    to {opacity: 1;}
-}
-
-.redacted {
-    background: #00ff9f;
-    color: black;
-    padding: 2px 5px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.redacted:hover {
-    background: transparent;
-    color: #00ff9f;
-}
-
-.chat {
-    background: rgba(0,255,159,0.05);
-    padding: 15px;
-    border-radius: 5px;
-    line-height: 1.6;
-}
-
-.scroll {
-    max-height: 200px;
-    overflow-y: auto;
-    border-left: 2px solid #00ff9f70;
-    padding-left: 10px;
-}
-
-.glow {
+.header {
+    text-align: center;
     margin-top: 20px;
-    font-style: italic;
-    text-shadow: 0 0 15px #00ffaa90;
 }
 
-.tiny {
-    font-size: 0.7rem;
-    opacity: 0.5;
-    margin-top: 5px;
+.glitch {
+    font-size: 3rem;
+    animation: glitch 1.5s infinite alternate;
 }
-.flag {
-    color: red;
-    text-shadow: 0 0 15px red;
+
+@keyframes glitch {
+    0% {text-shadow: 2px 2px #0f0, -2px -2px #f00;}
+    100% {text-shadow: -2px 2px #0ff, 2px -2px #ff0;}
 }
+
+.terminal-box {
+    width: 90%;
+    margin: auto;
+    border: 2px solid #00ff95;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.menu {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid #00ff95;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: #00ff95;
+    color: #000;
+}
+
+.section {display:none;}
+.section.active {display:block;}
+
+.profile-card {
+    border: 1px solid #00ff95;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.warn {color: red; text-shadow: 0 0 10px red;}
+.flag {color: #ff0044; font-weight: bold;}

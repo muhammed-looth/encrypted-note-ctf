@@ -59,7 +59,7 @@ def login():
             # Login the user
             login_user(user)
 
-            return redirect("/breach")
+            return redirect("/matrix")
 
         flash("ACCESS DENIED — INVALID CREDENTIALS")
         return redirect("/")
@@ -73,6 +73,7 @@ def breach():
 
 
 @app.route('/matrix')
+@login_required
 def matrix():
     return render_template('matrix.html')
 

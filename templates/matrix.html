@@ -2,55 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>THE EXPOSURE | MATRIX COLLECTIVE</title>
+    <title>MATRIX // DARKNET NODE</title>
     <link rel="stylesheet" href="/static/css/matrix.css">
 </head>
+
 <body>
+<div class="scanlines"></div>
 
-<div id="terminal">
-    <div class="title">
-        <span class="blink">></span> ACCESS GRANTED  
-    </div>
-    <div class="subtitle">Decrypting Leaks... Loading Intelligence...</div>
-    <hr>
+<div class="header">
+    <h1 class="glitch" data-text="MATRIX COLLECTIVE">MATRIX COLLECTIVE</h1>
+    <p class="sub">"WE ARE NOT HERE TO HIDE. WE ARE HERE TO EXPOSE."</p>
+</div>
 
-    <div class="section">
-        <h2>[ TARGET IDENTIFICATION ]</h2>
-        <p><b>Name:</b> <span class="reveal">Jonathan Carter</span></p>
-        <p><b>Email:</b> <span class="reveal">jcarter.research@protonmail.com</span></p>
-        <p><b>Phone:</b> <span class="reveal">+91-98234-52109</span></p>
-        <p><b>Last Known IP:</b> <span class="reveal hack-color">192.168.0.23</span></p>
-        <p><b>Location Estimate:</b> <span id="location" class="redacted">██████████</span></p>
-    </div>
+<div class="terminal-box">
 
-    <hr>
-
-    <div class="section">
-        <h2>[ BREACHED PASSWORDS ]</h2>
-        <ul>
-            <li><span class="redacted">██████████</span> → <span class="reveal">shadowking@123</span></li>
-            <li><span class="redacted">██████████</span> → <span class="reveal">secretwolf99</span></li>
-        </ul>
+    <div class="menu">
+        <button class="tab-btn active" data-target="breaches">Breached Profiles</button>
+        <button class="tab-btn" data-target="gov">Government Logs</button>
+        <button class="tab-btn" data-target="chats">Intercepted Chats</button>
+        <button class="tab-btn" data-target="dumps">Credential Dumps</button>
+        <button class="tab-btn" data-target="restricted">⚠ RESTRICTED</button>
     </div>
 
-    <hr>
+    <!-- SECTION: BREACHED PROFILES -->
+    <div class="section active" id="breaches">
+        <h2>☠ EXPOSED TARGETS</h2>
+        
+        <div class="profile-card">
+            <p><b>Name:</b> <span class="reveal">Evelyn Torres</span></p>
+            <p><b>Phone:</b> <span class="reveal">+7-98483-11921</span></p>
+            <p><b>Email:</b> <span class="reveal">etorres.finsec@outlook.com</span></p>
+            <p><b>Domain:</b> **********</p>
+            <p><b>Weakest Password Found:</b> <span class="warn">**********</span></p>
+            <p><b>Country:</b> Russia</p>
+        </div>
 
-    <div class="section scroll">
-        <h2>[ CHAT LOG EXTRACTION ]</h2>
-        <div class="chat">
-            <p><b>[11:04 PM] Carter:</b> "Are the files safe?"</p>
-            <p><b>[11:07 PM] Unknown:</b> "You're compromised. They know." </p>
-            <p><b>[11:07 PM] Carter:</b> "What??? How??"</p>
-            <p class="flag">[SYSTEM NOTE: Hidden key extracted → FLAG{d0nt_tru5t_any0ne}]</p>
+        <div class="profile-card">
+            <p><b>Name:</b> <span class="reveal">Dev Patel</span></p>
+            <p><b>Phone:</b> <span class="reveal">+91-92436-75018</span></p>
+            <p><b>Email:</b> <span class="reveal">datastream.dev@gmail.com</span></p>
+            <p><b>Domain:</b> https://encrypted-note-ctf.onrender.com</p>
+            <p><b>Password:</b> <span class="warn">**************</span></p>
+            <p><b>Country:</b> India</p>
+            <p><b>Status:</b> Tracking...</p>
         </div>
     </div>
 
-    <hr>
 
-    <footer>
-        <p class="glow">"We are the noise. We are the shadow. We are the ones behind the screen."</p>
-        <p class="tiny">MATRIX COLLECTIVE • 2025</p>
-    </footer>
+    <!-- SECTION: GOVERNMENT LOGS -->
+    <div class="section" id="gov">
+        <h2>🛑 COMPROMISED GOVERNMENT NODES</h2>
+
+        <pre class="log">
+[LOG] Accessing National Registry...
+[OK] Data Pipeline Breached
+[EXTRACT] Citizen Database → 2.4GB
+        </pre>
+    </div>
+
+
+    <!-- SECTION: INTERCEPTED CHATS -->
+    <div class="section" id="chats">
+        <h2>💬 INTERCEPTED CONVERSATIONS</h2>
+
+        <div class="chat">
+            <p><b>[01:22] Unknown:</b> “Dev, the key fragments are complete — all 10. But the order is chaos. I need the correct alignment. Now.”</p>
+            <p><b>[01:24] Dev:</b> “You’ve got the pieces. Now try my phone number.”</p>
+            <p><b>[01:25] Unknown:</b> “Hey, what’s this supposed to be? Looks important.”</p>
+            <p><b>[01:26] Dev:</b> “You hold the key now. Keep it safe — and whatever you do… don’t let it surface.”</p>
+        </div>
+    </div>
+
+
+    <!-- DUMP SECTION -->
+    <div class="section" id="dumps">
+        <h2>📁 CREDENTIAL DUMP</h2>
+        <table>
+            <tr><th>User</th><th>Hash</th><th>Last Login</th></tr>
+            <tr><td>root</td><td>******************************</td><td>01:11:43 AM</td></tr>
+            <tr><td>admin</td><td>******************************</td><td>03:54:12 PM</td></tr>
+        </table>
+    </div>
+
+    <!-- RESTRICTED -->
+    <div class="section locked" id="restricted">
+        <h2>🔥 RESTRICTED VAULT 🔥</h2>
+        <p>Decrypting...</p>
+        <p class="flag">⚠ ACCESS RESTRICTION:<br>
+Unlock Time: 01:00 AM <br>
+Duration: 1 Hour Only</p>
+    </div>
+
 </div>
 
 <script src="/static/js/matrix.js"></script>

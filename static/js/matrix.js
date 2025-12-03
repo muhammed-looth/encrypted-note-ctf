@@ -1,17 +1,16 @@
-console.log("%cACCESS LOGGED | TRACE INITIATED", "color:red; font-size:18px");
+const buttons = document.querySelectorAll(".tab-btn");
+const sections = document.querySelectorAll(".section");
 
-const redacted = document.querySelectorAll(".redacted");
+buttons.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+        buttons.forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
 
-redacted.forEach(el => {
-    el.addEventListener("click", () => {
-        el.style.transition = "0.5s";
-        el.style.background = "transparent";
-        el.style.color = "#00ff9f";
-        el.innerText = el.dataset.real || "UNMASKED";
+        sections.forEach(sec=>{
+            sec.classList.remove("active");
+            if(sec.id === btn.dataset.target) sec.classList.add("active");
+        });
     });
 });
 
-// Fake location reveal effect
-setTimeout(() => {
-    document.getElementById("location").innerHTML = "Mumbai, India";
-}, 5000);
+console.log("%cMATRIX NODE ACCESS RECORDED.", "color:red; font-size:16px");
