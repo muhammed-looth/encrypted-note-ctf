@@ -45,8 +45,21 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
+        # Hardcoded login check
         if username == VALID_USERNAME and password == VALID_PASSWORD:
-            return redirect("/breach")  # or your secret page
+            # Check if user exists in DB
+            user = User.query.filter_by(username=username).first()
+
+            # If not, create it (optional)
+            if not user:
+                user = User(username=username, password=generate_password_hash(password))
+                db.session.add(user)
+                db.session.commit()
+
+            # Login the user
+            login_user(user)
+
+            return redirect("/breach")
 
         flash("ACCESS DENIED — INVALID CREDENTIALS")
         return redirect("/")
