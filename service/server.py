@@ -66,11 +66,6 @@ def login():
 
     return render_template("login.html")
 
-@app.route('/breach')
-@login_required
-def breach():
-    return render_template('breach.html')
-
 
 @app.route('/matrix')
 @login_required
