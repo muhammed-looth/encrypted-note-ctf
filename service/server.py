@@ -46,17 +46,22 @@ def login():
         password = request.form.get("password")
 
         if username == VALID_USERNAME and password == VALID_PASSWORD:
-            return redirect("/blog")  # or your secret page
+            return redirect("/breach")  # or your secret page
 
         flash("ACCESS DENIED — INVALID CREDENTIALS")
         return redirect("/")
 
     return render_template("login.html")
 
-@app.route('/blog')
+@app.route('/breach')
 @login_required
-def blog():
-    return render_template('blog.html')
+def breach():
+    return render_template('breach.html')
+
+
+@app.route('/matrix')
+def matrix():
+    return render_template('matrix.html')
 
 
 
