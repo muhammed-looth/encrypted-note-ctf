@@ -1,79 +1,48 @@
-// Puzzle pieces drag and drop mechanics and solution check
+document.addEventListener("DOMContentLoaded", () => {
+    const puzzleBoard = document.getElementById("puzzleBoard");
+    const keyReveal = document.getElementById("keyReveal");
 
-document.addEventListener('DOMContentLoaded', () => {
-  const rows = 4, cols = 4;
-  const puzzleBoard = document.getElementById('puzzleBoard');
-  const keyReveal = document.getElementById('keyReveal');
-  let draggingElem = null;
-  let dragElemIndex = -1;
-  let piecesOrder = [];
+    let grid = [...Array(15).keys()].map(n => n + 1);
+    grid.push(""); // empty tile
+    shuffle(grid);
 
-  // Initialize pieces data with correct positions (0 to 15)
-  for (let i = 0; i < rows * cols; i++) {
-    piecesOrder.push(i);
-  }
-  // Shuffle piecesOrder for starting positions
-  piecesOrder = shuffleArray(piecesOrder);
-
-  // Create puzzle pieces elements
-  piecesOrder.forEach((pos, idx) => {
-    const piece = document.createElement('div');
-    piece.classList.add('puzzle-piece');
-    piece.style.backgroundPosition = `${-(pos % cols) * 160}px ${-(Math.floor(pos / cols)) * 160}px`;
-    piece.setAttribute('data-pos', pos);
-    piece.setAttribute('draggable', true);
-    piece.setAttribute('aria-label', `Puzzle piece ${pos + 1}`);
-    puzzleBoard.appendChild(piece);
-  });
-
-  puzzleBoard.addEventListener('dragstart', (e) => {
-    if (!e.target.classList.contains('puzzle-piece')) return;
-    draggingElem = e.target;
-    dragElemIndex = Array.from(puzzleBoard.children).indexOf(draggingElem);
-    setTimeout(() => {
-      draggingElem.classList.add('dragging');
-    }, 0);
-  });
-
-  puzzleBoard.addEventListener('dragend', (e) => {
-    if (draggingElem) {
-      draggingElem.classList.remove('dragging');
-      draggingElem = null;
-      dragElemIndex = -1;
-      checkSolution();
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
     }
-  });
 
-  puzzleBoard.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    const target = e.target;
-    if (!target.classList.contains('puzzle-piece') || target === draggingElem) return;
+    function render() {
+        puzzleBoard.innerHTML = "";
+        grid.forEach((val, index) => {
+            const tile = document.createElement("div");
+            tile.classList.add("tile");
+            if (val === "") tile.classList.add("empty");
+            tile.textContent = val;
 
-    const targetIndex = Array.from(puzzleBoard.children).indexOf(target);
-    if (dragElemIndex < targetIndex) {
-      puzzleBoard.insertBefore(draggingElem, target.nextSibling);
-    } else {
-      puzzleBoard.insertBefore(draggingElem, target);
+            tile.addEventListener("click", () => moveTile(index));
+            puzzleBoard.appendChild(tile);
+        });
     }
-  });
 
-  // Shuffle function
-  function shuffleArray(arr) {
-    let shuffled = arr.slice();
-    for(let i = shuffled.length -1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }
+    function moveTile(index) {
+        const emptyIndex = grid.indexOf("");
+        const validMoves = [index - 1, index + 1, index - 4, index + 4];
 
-  // Check if puzzle solved by comparing data-pos in correct order
-  function checkSolution() {
-    const children = Array.from(puzzleBoard.children);
-    for(let i = 0; i < children.length; i++) {
-      if (+children[i].getAttribute('data-pos') !== i) return;
+        if (validMoves.includes(emptyIndex)) {
+            [grid[index], grid[emptyIndex]] = [grid[emptyIndex], grid[index]];
+            render();
+            checkWin();
+        }
     }
-    // Puzzle solved
-    keyReveal.style.display = 'block';
-  }
+
+    function checkWin() {
+        const solution = [...Array(15).keys()].map(n => n + 1).concat("");
+        if (JSON.stringify(grid) === JSON.stringify(solution)) {
+            keyReveal.style.display = "block";
+        }
+    }
+
+    render();
 });

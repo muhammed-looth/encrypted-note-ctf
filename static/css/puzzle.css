@@ -1,71 +1,71 @@
 body {
-  background: linear-gradient(135deg, #2c3e50, #4ca1af);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 30px 20px;
-  color: #fff;
+  background: black;
+  font-family: monospace;
+  color: #00ff41;
   text-align: center;
-  user-select: none;
 }
 
-.puzzle-container {
-  max-width: 680px;
-  margin: 0 auto;
-  background: rgba(0,0,0,0.6);
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-}
-
-h1 {
-  font-size: 2.8rem;
-  margin-bottom: 12px;
-  color: #ffe066;
-  text-shadow: 0 0 8px #fff913;
+.matrix-title {
+  font-size: 2.5rem;
+  text-shadow: 0 0 12px #00ff41;
 }
 
 .instructions {
-  font-size: 1.2rem;
-  margin-bottom: 25px;
-  color: #ffd95bcc;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
 }
+
+.green { color: #00ff41; font-weight: bold; }
 
 .puzzle-board {
   display: grid;
-  grid-template-columns: repeat(4, 160px);
-  grid-gap: 12px;
+  grid-template-columns: repeat(4, 90px);
+  grid-gap: 10px;
   justify-content: center;
-  margin-bottom: 30px;
-  user-select: none;
+  margin: 30px auto;
 }
 
-.puzzle-piece {
-  width: 160px;
-  height: 160px;
-  border-radius: 12px;
-  background-image: url('/static/img/puzzim.webp');
-  background-repeat: no-repeat;
-  cursor: move;
-  transition: box-shadow 0.3s ease;
-  border: 2px solid transparent;
-  box-shadow: 0 6px 10px rgb(0 0 0 / 0.8);
+.tile {
+  width: 90px;
+  height: 90px;
+  background: rgba(0,255,65,0.15);
+  border: 2px solid #00ff41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 0 0 10px #00ff41;
+  transition: 0.2s;
 }
 
-.puzzle-piece.dragging {
-  opacity: 0.7;
-  box-shadow: 0 8px 18px #fff498;
-  cursor: grabbing;
-  z-index: 5;
-  border-color: #fff498;
+.tile:hover {
+  background: rgba(0,255,65,0.3);
+  box-shadow: 0 0 12px #00ff41;
+}
+
+.empty {
+  background: rgba(0,0,0,0.2);
+  border: 2px dashed #004d19;
+  cursor: default;
 }
 
 .key-reveal {
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: #ffff7d;
-  background-color: #1a1a00dd;
-  border-radius: 15px;
-  padding: 20px 32px;
-  box-shadow: 0 0 25px #fff585cc;
-  user-select: text;
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #00ff41;
+  background: rgba(0,255,65,0.1);
+  text-shadow: 0 0 8px #00ff41;
+  display: inline-block;
+}
+
+.glitch {
+  animation: glitch 1.2s infinite alternate;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 2px #00ff41; }
+  50% { text-shadow: -2px -2px #00ff41; }
+  100% { text-shadow: 0 0 10px #00ff41; }
 }

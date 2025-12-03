@@ -180,7 +180,7 @@ def neonPage():
 def shadowPage():
     return render_template('shadow.html')
 
-@app.route('/puzzle')
+@app.route('/ddcb4be46283a08885a8347abe4142e6630f62e8')
 def puzzlePage():
     return render_template('puzzle.html')
 
