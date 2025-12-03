@@ -184,7 +184,7 @@ def shadowPage():
 def puzzlePage():
     return render_template('puzzle.html')
 
-@app.route('/labyrinth')
+@app.route('/357de8f622ff2aaeb5073eabcb4b770be81cb56a')
 def labyrinthPage():
     return render_template('labyrinth.html')
 
