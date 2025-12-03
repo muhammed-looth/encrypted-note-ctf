@@ -148,7 +148,7 @@ def get_note(note_id):
 # def chatPage():
 #     return render_template('chat-app.html')
 
-@app.route('/maze')
+@app.route('/bcc4d4f0381c74919db335641dc13b085bf1d0fd')
 def mazePage():
     return render_template('maze.html')
 
