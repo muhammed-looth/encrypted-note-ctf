@@ -160,7 +160,7 @@ def glitchPage():
 def phantomPage():
     return render_template('phantom.html')
 
-@app.route('/cipherlab')
+@app.route('/6f0c4d135d45f6ddaa457359ffd4d01f394388c2')
 def cipherLabPage():
     return render_template('cipherlab.html')
 
