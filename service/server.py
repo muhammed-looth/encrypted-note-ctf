@@ -156,7 +156,7 @@ def mazePage():
 def glitchPage():
     return render_template('glitch.html')
 
-@app.route('/phantom')
+@app.route('/d969e7e0b0571370cd6763192bc24ac56c255472')
 def phantomPage():
     return render_template('phantom.html')
 
