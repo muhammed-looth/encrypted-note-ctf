@@ -172,7 +172,7 @@ def mirrorPage():
 def noisePage():
     return render_template('noise.html')
 
-@app.route('/neon')
+@app.route('/09407639790bbb3778e1c2a9f81c0680186097d1')
 def neonPage():
     return render_template('neon.html')
 
