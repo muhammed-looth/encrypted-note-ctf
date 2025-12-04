@@ -73,10 +73,6 @@ def matrix():
     return render_template('matrix.html')
 
 
-
-
-
-
 NOTES_DIR = './notes'
 
 # This is a mock global variable that could leak data in race
@@ -134,20 +130,6 @@ def get_note(note_id):
         return jsonify(data)
 
 
-
-
-
-
-
-
-# @app.route('/')
-# def loginPage():
-#     return render_template('login.html') 
-
-# @app.route('/chat-app')
-# def chatPage():
-#     return render_template('chat-app.html')
-
 @app.route('/bcc4d4f0381c74919db335641dc13b085bf1d0fd')
 def mazePage():
     return render_template('maze.html')
@@ -187,10 +169,6 @@ def puzzlePage():
 @app.route('/357de8f622ff2aaeb5073eabcb4b770be81cb56a')
 def labyrinthPage():
     return render_template('labyrinth.html')
-
-@app.route('/leaked_chat')
-def leaked_chat():
-    return render_template('leaked_chat.html')
 
 @app.route('/about')
 def about():
