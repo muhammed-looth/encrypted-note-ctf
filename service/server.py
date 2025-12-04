@@ -168,7 +168,7 @@ def cipherLabPage():
 def mirrorPage():
     return render_template('mirror.html')
 
-@app.route('/noise')
+@app.route('/9424ac79de34c97c74261622b533d185ca13968a')
 def noisePage():
     return render_template('noise.html')
 
