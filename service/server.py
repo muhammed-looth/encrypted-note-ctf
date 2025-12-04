@@ -164,7 +164,7 @@ def phantomPage():
 def cipherLabPage():
     return render_template('cipherlab.html')
 
-@app.route('/mirror')
+@app.route('/ffff80d25a2651a57130b409d7bf0e751e29b578')
 def mirrorPage():
     return render_template('mirror.html')
 
