@@ -152,7 +152,7 @@ def get_note(note_id):
 def mazePage():
     return render_template('maze.html')
 
-@app.route('/glitch')
+@app.route('/7e616b8425b61abdb010fb9117351f0d700585dd')
 def glitchPage():
     return render_template('glitch.html')
 
