@@ -176,7 +176,7 @@ def noisePage():
 def neonPage():
     return render_template('neon.html')
 
-@app.route('/shadow')
+@app.route('/ed9d3d832af899035363a69fd53cd3be8f71501c')
 def shadowPage():
     return render_template('shadow.html')
 
