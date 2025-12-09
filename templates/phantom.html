@@ -1,56 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Phantom Puzzle | CTF Challenge</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/phantom.css') }}" />
+<meta charset="UTF-8">
+<title>PHANTOM PROTOCOL ACCESS</title>
+<link rel="stylesheet" href="/static/css/phantom.css">
 </head>
 <body>
-  <div class="phantom-container">
-    <h1 class="title">The Phantom Lurks...</h1>
-    <p class="instructions">Only the sharpest insights will unveil the hidden key.<br>Move slowly and discover the unseen.</p>
 
-    <div id="phantom-area" class="phantom-area" title="Explore here...">
-      <div id="phantom-shape" class="phantom-shape"></div>
-    </div>
+<div class="scan-overlay"></div>
+<div class="background"></div>
 
-    <div id="keyReveal" class="key-reveal" style="display:none;">
-      👻 You uncovered the phantom's secret! key part (07) 👻<br />
-      <code>   NEtKcW1IQ1F4ZmRPWWI1cGp0VVZRQ2V2ZXdLQmdRRFpJL1h3RWNsMVBWSGV2QzJQeFRqaUlpK2FXUnAwNVFxWQphclJKT1ZUOGhGRmZveEUzRWZMUitmY3VtOGhlZUtabUpLNTFrL2VWZXJSRURYWFBJYlNGL1JFWnR5UlJZQ0NBCkhWelFkUzkwM3YzZ2Y0WEJ4bit3aDNsTlpUSEFSUzJxTkZlN042U1Z6R24relVjZlBoUFdmSjV0Sk9YZ0VEcWg=    
-        <br> !NEXT CHALLENGE: https://encrypted-note-ctf.onrender.com/ed9d3d832af899035363a69fd53cd3be8f71501c
-      </code>
-    </div>
-  </div>
+<div class="container">
+  <h1 class="title">PHANTOM ACCESS NODE</h1>
+  <p class="subtitle">Synchronize signal levels to decrypt encrypted payload.</p>
 
-  <script>
-    const phantomArea = document.getElementById('phantom-area');
-    const phantomShape = document.getElementById('phantom-shape');
-    const keyReveal = document.getElementById('keyReveal');
-    
-    let revealTimeout;
+  <div id="panel"></div>
 
-    phantomArea.addEventListener('mousemove', (e) => {
-      const rect = phantomArea.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  <div id="flag" class="hidden"></div>
+</div>
 
-      // Show phantom slowly when mouse moves near shape center
-      if (
-        x > rect.width * 0.45 && x < rect.width * 0.55 &&
-        y > rect.height * 0.45 && y < rect.height * 0.55
-      ) {
-        phantomShape.classList.add('visible');
-        if(revealTimeout) clearTimeout(revealTimeout);
-        revealTimeout = setTimeout(() => {
-          keyReveal.style.display = "block";
-        }, 3000);  // key revealed if user stays over center 1.5 sec
-      } else {
-        phantomShape.classList.remove('visible');
-        if(revealTimeout) clearTimeout(revealTimeout);
-        keyReveal.style.display = "none";
-      }
-    });
-  </script>
+<script src="/static/js/phantom.js"></script>
 </body>
 </html>

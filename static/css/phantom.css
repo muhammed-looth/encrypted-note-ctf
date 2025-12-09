@@ -1,104 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 body {
   margin: 0;
-  background: radial-gradient(circle at center, #0a0a0a 0%, #050505 85%);
-  font-family: 'Cinzel', serif;
-  color: #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  flex-direction: column;
-  user-select: none;
-  text-align: center;
+  overflow: hidden;
+  font-family: "Share Tech Mono", monospace;
+  color: #00ffbf;
 }
 
-.phantom-container {
-  max-width: 650px;
-  padding: 40px 30px;
-  background: rgba(15,15,15,0.8);
-  border-radius: 20px;
-  box-shadow:
-    inset 0 0 150px 50px #000000,
-    0 0 60px 10px #1b1b1b;
+/* Matrix Wireframe Background */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://i.ibb.co/h8D25w0/matrix-grid.jpg");
+  background-size: cover;
+  filter: brightness(30%) contrast(130%);
+  z-index: -2;
+}
+
+/* Pulse scan UI effect */
+.scan-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, transparent, rgba(0,255,180,0.1), transparent);
+  animation: scan 4s infinite linear;
+  z-index: -1;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* Content */
+.container {
+  text-align: center;
+  margin-top: 50px;
 }
 
 .title {
-  font-size: 3.6rem;
-  margin-bottom: 12px;
-  color: #8d8d8d;
-  text-shadow:
-    0 0 12px #5c5c5c,
-    0 0 24px #2b2b2b;
-  user-select: text;
+  font-size: 2.5rem;
+  text-shadow: 0 0 18px #00ffc2;
+  letter-spacing: 3px;
 }
 
-.instructions {
-  font-size: 1.25rem;
-  margin-bottom: 30px;
-  font-style: italic;
-  color: #a9a9a9cc;
-  user-select: text;
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 50px;
 }
 
-/* The big phantom area with subtle shadows */
-.phantom-area {
-  position: relative;
-  width: 420px;
-  height: 250px;
-  margin: 0 auto 30px;
-  border-radius: 25px;
-  box-shadow:
-    inset 0 0 60px 30px #1a1a1a,
-    0 3px 12px rgba(30,30,30,0.6);
-  background: linear-gradient(135deg, #181818 30%, #080808 80%);
-  cursor: crosshair;
-  overflow: hidden;
+#panel {
+  width: 650px;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
 }
 
-/* Phantom shape - barely visible */
-.phantom-shape {
-  position: absolute;
-  top: 48%;
-  left: 48%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 130px;
-  background: radial-gradient(ellipse at center,
-    rgba(180,180,180,0.05) 0%,
-    rgba(100,100,100,0) 85%);
-  border-radius: 50% 50% 75% 75% / 45% 45% 80% 80%;
-  box-shadow: 0 0 12px 5px rgba(200, 200, 200, 0.12),
-              inset 0 0 15px 10px rgba(150, 150, 150, 0.08);
+/* Slider styling */
+.slider {
+  -webkit-appearance: none;
+  height: 260px;
+  width: 90px;
+  transform: rotate(-90deg);
+  background: rgba(0,255,180,0.05);
+  border: 1px solid #00ffbf66;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #00ffbf44 inset;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  background: #ff003c;
+  border: 2px solid #00ffbf;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+/* When correct */
+.correct::-webkit-slider-thumb {
+  background: #00ff57 !important;
+  box-shadow: 0 0 20px #00ff57aa, 0 0 40px #00ff57;
+}
+
+/* FLAG Reveal */
+#flag {
+  font-size: 1.8rem;
+  margin-top: 50px;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
-  filter: blur(3px);
-  user-select: none;
+  transition: 2s;
+  color: #00ff95;
+  text-shadow: 0 0 20px #00ffa2;
 }
 
-/* Show phantom on hover with slow fade */
-.phantom-shape.visible {
-  opacity: 0.10;
-  pointer-events: auto;
-  filter: blur(0);
-  box-shadow:
-    0 0 20px 7px rgba(255,255,255,0.22),
-    inset 0 0 40px 15px rgba(220,220,220,0.15);
+.hidden { display: none; }
+
+/* Screen glitch effect */
+.flash {
+  animation: flash 0.5s;
 }
 
-/* Key reveal block */
-.key-reveal {
-  font-size: 1.65rem;
-  font-weight: 700;
-  color: #d6e8fa;
-  background: rgba(30, 30, 40, 0.9);
-  border-radius: 16px;
-  padding: 22px 38px;
-  box-shadow:
-    0 0 30px 8px #9db9f2aa,
-    inset 0 0 15px 6px #fcfefebf;
-  user-select: text;
-  word-break: break-word;
+@keyframes flash {
+  0% { filter: brightness(500%); }
+  100% { filter: brightness(100%); }
+}
+
+#flag strong {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  display: block;
+  max-width: 80%;
+  margin: auto;
 }
