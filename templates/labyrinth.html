@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/labyrinth.css') }}" />
 </head>
 <body>
+
+   <audio id="bg-audio" loop preload="auto">
+    <!-- Replace the src below with your own dark ambient / horror track URL -->
+    <source src="{{ url_for('static', filename='audio/strange-dance.wav') }}" type="audio/mpeg">
+    <!-- Optional: add an OGG version for better compatibility -->
+    <!-- <source src="{{ url_for('static', filename='audio/dark_ambient.ogg') }}" type="audio/ogg"> -->
+    Your browser does not support the audio element.
+</audio>
+
+
   <div class="labyrinth-container">
     <h1 class="title">Enter the Labyrinth</h1>
     <p class="instructions">Navigate the shifting maze, find 3 hidden glyphs, and decode the obfuscated key.<br>Time is running out...</p>
@@ -37,5 +47,28 @@
   <!-- Z2x5cGhfMzogcHJlc3Nfc3BhY2ViYXJfd2hlbl9sYWJ5cmludGhfc3BpbnM= -->
   
   <script src="{{ url_for('static', filename='js/labyrinth.js') }}"></script>
+  <script>
+    // Try to start audio on first user interaction (click / key / touch)
+    const bgAudio = document.getElementById('bg-audio');
+    let audioStarted = false;
+
+    function startBgAudio() {
+        if (audioStarted) return;
+        audioStarted = true;
+        if (bgAudio) {
+            const p = bgAudio.play();
+            if (p && typeof p.then === 'function') {
+                p.catch(() => {
+                    // If browser still blocks it, just fail silently
+                });
+            }
+        }
+    }
+
+    window.addEventListener('click', startBgAudio);
+    window.addEventListener('keydown', startBgAudio);
+    window.addEventListener('touchstart', startBgAudio);
+</script>
+
 </body>
 </html>
