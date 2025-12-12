@@ -1,44 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shadow Puzzle | CTF Challenge</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/shadow.css') }}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Terminal | CTF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shadow.css') }}">
 </head>
 <body>
-  <div class="shadow-container">
-    <h1 class="title">Welcome to the Shadow Realm</h1>
-    <p class="instructions">A secret key is hidden in the shadows.<br>Explore carefully with your mouse.</p>
 
-    <div id="shadowArea" class="shadow-area" title="Explore the darkness..."></div>
+<div class="terminal-container">
+    <div class="scanline"></div>
 
-    <div id="keyReveal" class="key-reveal" style="display:none;">
-      👤 You found the shadow’s secret! part 9 👤<br/>
-      <code>LS0tLUJFR0lOIFBSSVZBVEUgS0VZLS0tLS0KTUlJRXZ3SUJBREFOQmdrcWhraUc5dzBCQVFFRkFBU0NCS2t3Z2dTbEFnRUFBb0lCQVFEUUJPZWpydnJUTVFlagowcno5OEI1Mmpod2lSTk5leThDYmplRE9rVGQrR0V5Nk5zK0orc3RWbjUycE1iMFAxWTdTYkFNalF0TjJVZUd1
-        <br> !NEXT CHALLENGE: https://encrypted-note-ctf.onrender.com/9424ac79de34c97c74261622b533d185ca13968a
+    <div class="terminal-screen">
+        <h1 class="title">E C H O — T E R M I N A L</h1>
+        <p class="subtitle">Nothing hides in plain sight.<br>But the echoes remember.</p>
+
+        <div id="terminalOutput" class="terminal-output"></div>
+
+        <div class="input-row">
+            <span class="prompt">></span>
+            <input id="terminalInput" autocomplete="off" class="terminal-input" />
+        </div>
     </div>
-  </div>
+</div>
 
-  <script>
-    const shadowArea = document.getElementById('shadowArea');
-    const keyReveal = document.getElementById('keyReveal');
+<audio id="glitchSound" src="{{ url_for('static', filename='audio/glitch.wav') }}"></audio>
+<audio id="pulseSound" src="{{ url_for('static', filename='audio/pulse.wav') }}"></audio>
+<audio id="unlockSound" src="{{ url_for('static', filename='audio/unlock.wav') }}"></audio>
 
-    shadowArea.addEventListener('mousemove', (e) => {
-      const rect = shadowArea.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+<script src="{{ url_for('static', filename='js/shadow.js') }}"></script>
 
-      // Specific dark “shadow hotspot” to reveal
-      if (
-        x > rect.width * 0.3 && x < rect.width * 0.5 &&
-        y > rect.height * 0.55 && y < rect.height * 0.75
-      ) {
-        keyReveal.style.display = "block";
-      } else {
-        keyReveal.style.display = "none";
-      }
-    });
-  </script>
 </body>
 </html>
