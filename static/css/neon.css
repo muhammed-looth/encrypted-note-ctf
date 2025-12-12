@@ -1,137 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
 
 body {
-  background-color: #0a0a0a;
-  color: #0ff;
-  font-family: 'Monoton', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  user-select: none;
-  flex-direction: column;
-  text-align: center;
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Orbitron', sans-serif;
+    color: #0ff;
 }
 
 .neon-container {
-  padding: 40px 20px;
-  max-width: 600px;
-  border-radius: 18px;
-  background: #001a33;
-  box-shadow: 0 0 35px #00ffffcc, inset 0 0 25px #00ffffbb;
-  animation: pulseGlow 3s infinite alternate ease-in-out;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
 }
 
-.neon-title {
-  font-size: 3.8rem;
-  color: #00fff7;
-  text-shadow:
-    0 0 6px #00fff7, 
-    0 0 12px #00fff7, 
-    0 0 18px #00fff7, 
-    0 0 24px #00b4af, 
-    0 0 30px #00b4af;
-  margin-bottom: 10px;
-  user-select: text;
+.header-text {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    pointer-events: none;
 }
 
-.neon-instructions {
-  font-size: 1.4rem;
-  color: #66ffffcc;
-  margin-bottom: 30px;
-  user-select: text;
+.header-text h1 {
+    font-size: 4rem;
+    color: #0ff;
+    text-shadow: 0 0 25px #0ff, 0 0 60px #0ff;
 }
 
-.neon-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 70px);
-  grid-gap: 18px;
-  justify-content: center;
+.header-text p {
+    font-size: 1.2rem;
+    color: #09f2ffdd;
+    text-shadow: 0 0 12px #0ff;
 }
 
-.neon-block {
-  background: #000;
-  border-radius: 14px;
-  box-shadow:
-    0 0 12px #11ffffaa,
-    inset 0 0 10px #00ffe5;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #00ffd6;
-  line-height: 70px;
-  text-align: center;
-  cursor: default;
-  user-select: none;
-  position: relative;
-  transition: box-shadow 0.3s ease;
-  filter: drop-shadow(0 0 2px #00ffffaa);
-  outline: none;
+.key-box {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 255, 255, 0.15);
+    padding: 22px 40px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    font-size: 1.3rem;
+    color: #0ff;
+    box-shadow: 0 0 20px #0ff, inset 0 0 20px #00faff;
+    text-shadow: 0 0 18px #0ff;
+    z-index: 200;
+    /*pointer-events: none;*/
 }
 
-.neon-block.secret {
-  filter: brightness(0.8);
-  cursor: pointer;
-  position: relative;
-  animation: flickerLight 3.5s infinite;
-}
-
-.neon-block.secret:hover, 
-.neon-block.secret:focus {
-  filter: brightness(1) drop-shadow(0 0 15px #00ffee);
-  box-shadow:
-    0 0 25px #00ffee,
-    inset 0 0 15px #00eeff;
-}
-
-.secret-key {
-  font-size: 1.7rem;
-  margin-top: 36px;
-  color: #00ffd6;
-  font-weight: 700;
-  user-select: text;
-  text-shadow: 0 0 18px #00ffebbb;
-  border: 2px solid #00ffeedd;
-  background-color: #002a4d88;
-  padding: 18px 30px;
-  border-radius: 15px;
-  animation: lightGlow 2.5s infinite alternate;
-  white-space: pre-wrap;      /* preserve whitespace and wrap lines */
-  word-wrap: break-word;      /* break long words if needed */
-  max-width: 90vw;            /* max width relative to viewport */
-  margin: 20px auto;          /* centered with vertical spacing */
-  padding: 16px 24px;
-  background-color: rgba(0,0,0,0.7);
-  color: #0f0;
-  font-family: monospace;    /* for code-like key display */
-  font-size: 1.15rem;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #0f0;
-  overflow-wrap: break-word;
-}
-
-/* Animations */
-
-@keyframes flickerLight {
-  0%, 100% { filter: brightness(0.8) drop-shadow(0 0 10px #00ffee); }
-  50% { filter: brightness(1.1) drop-shadow(0 0 20px #00fffee7); }
-}
-
-@keyframes pulseGlow {
-  from {
-    box-shadow:
-      0 0 20px #00ffffcc,
-      inset 0 0 15px #00ffffcc;
-  }
-  to {
-    box-shadow:
-      0 0 45px #00fffbcc,
-      inset 0 0 30px #00fffbcc;
-  }
-}
-
-@keyframes lightGlow {
-  0% { text-shadow: 0 0 8px #00ffebbb; background-color: #001f3d99; }
-  100% { text-shadow: 0 0 18px #00ffd6ff; background-color: #003f71bb; }
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

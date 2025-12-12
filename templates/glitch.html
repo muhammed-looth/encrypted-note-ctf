@@ -7,6 +7,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/glitch.css') }}">
 </head>
 <body>
+
+     <audio id="bg-audio" loop preload="auto">
+    <!-- Replace the src below with your own dark ambient / horror track URL -->
+    <source src="{{ url_for('static', filename='audio/suspense-crime.wav') }}" type="audio/mpeg">
+    <!-- Optional: add an OGG version for better compatibility -->
+    <!-- <source src="{{ url_for('static', filename='audio/dark_ambient.ogg') }}" type="audio/ogg"> -->
+    Your browser does not support the audio element.
+</audio>
+
 <div class="container">
 <h1 class="glitch">GlitchLab</h1>
 <p class="intro">Something in this page is broken... or maybe it's hiding something.</p>
@@ -15,5 +24,28 @@
 
 
 <script src="{{ url_for('static', filename='js/glitch.js') }}"></script>
+<script>
+    // Try to start audio on first user interaction (click / key / touch)
+    const bgAudio = document.getElementById('bg-audio');
+    let audioStarted = false;
+
+    function startBgAudio() {
+        if (audioStarted) return;
+        audioStarted = true;
+        if (bgAudio) {
+            const p = bgAudio.play();
+            if (p && typeof p.then === 'function') {
+                p.catch(() => {
+                    // If browser still blocks it, just fail silently
+                });
+            }
+        }
+    }
+
+    window.addEventListener('click', startBgAudio);
+    window.addEventListener('keydown', startBgAudio);
+    window.addEventListener('touchstart', startBgAudio);
+</script>
+
 </body>
 </html>

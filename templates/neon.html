@@ -1,52 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Neon Challenge | CTF Puzzle</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/neon.css') }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEON RIFT | CTF Challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/neon.css') }}">
 </head>
 <body>
-  <div class="neon-container">
-    <h1 class="neon-title">Welcome to the Neon Realm</h1>
-    <p class="neon-instructions">
-      Somewhere in the lights, a secret glows.<br />
-      Search closely and beware—the code flickers...
-    </p>
-    <div class="neon-grid">
-      <div class="neon-block" tabindex="0">N</div>
-      <div class="neon-block">E</div>
-      <div class="neon-block" tabindex="0">O</div>
-      <div class="neon-block">N</div>
 
-      <div class="neon-block secret" tabindex="0" title="Click me if you dare!">C</div>
-      <div class="neon-block">T</div>
-      <div class="neon-block">F</div>
+<div class="neon-container">
+    <canvas id="neonCanvas"></canvas>
 
-      <div class="neon-block">0</div>
-      <div class="neon-block secret" tabindex="0" title="Hidden here!">7</div>
-      <div class="neon-block">4</div>
-
-      <div class="neon-block">P</div>
-      <div class="neon-block secret" tabindex="0" title="Find me!">R</div>
-      <div class="neon-block">T</div>
+    <div class="header-text">
+        <h1>NEON • RIFT</h1>
+        <p>Break the pattern. Bend the light.  
+           <br>Some paths only appear when you move wrong.</p>
     </div>
-    <div id="secret-key" class="secret-key" style="display:none;">
-      🎉 You discovered the key part! 5 🎉<br/>
-      <code>{   MRVDKQRUJB3G4RDXJNBGOUKEPBLTO2SFKZSXS6LQNFLTQMC2GZYHUODKNBIVU33YJM3S6OKLLE3TKM3DGNKVATZWI4ZVQ5LJIFUE4UYKIZTXK3TSNMZE2TDCGBSUSULJI44GGZ2IGZVEGZKTIVIXKSSWIJXEK42QMZLFMZDCGN2G2ZCBIFLXC4TZIIYFANLQPJYW45KJLIYEY2Y=    }
-      <br><br> !NEXT CHALLENGE: https://encrypted-note-ctf.onrender.com/ffff80d25a2651a57130b409d7bf0e751e29b578
-      </code>
-    </div>
-  </div>
 
-  <script>
-    const secrets = document.querySelectorAll('.secret');
-    const secretKey = document.getElementById('secret-key');
-    secrets.forEach(block => {
-      block.addEventListener('click', () => {
-        secretKey.style.display = 'block';
-      });
-    });
-  </script>
+    <div id="keyBox" class="key-box" style="display:none;">
+        🔥 **NEON KEY PART 05** 🔥  
+        <br><code>MRVDKQRUJB3G4RDXJNBGOUKEPBLTO2SFKZSXS6LQNFLTQMC2GZYHUODKNBIVU33YJM3S6OKLLE3TKM3DGNKVATZWI4ZVQ5LJIFUE4UYKIZTXK3TSNMZE2TDCGBSUSULJI44GGZ2IGZVEGZKTIVIXKSSWIJXEK42QMZLFMZDCGN2G2ZCBIFLXC4TZIIYFANLQPJYW45KJLIYEY2Y=</code>
+        <br><br>NEXT → https://encrypted-note-ctf.onrender.com/ffff80d25a2651a57130b409d7bf0e751e29b578
+    </div>
+</div>
+
+<audio id="pulseSound" src="{{ url_for('static', filename='audio/neon_pulse.wav') }}"></audio>
+<audio id="unlockSound" src="{{ url_for('static', filename='audio/neon.wav') }}"></audio>
+
+<script src="{{ url_for('static', filename='js/neon.js') }}"></script>
+
 </body>
 </html>

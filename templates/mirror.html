@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mirror Puzzle | CTF Challenge</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/mirror.css') }}" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>M I R R O R | CTF Challenge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mirror.css') }}" />
 </head>
 <body>
-    <div class="container">
-      <h1>Mirror Puzzle</h1>
-      <p class="instructions">A part of the key is hidden in the reflection.<br>Explore, hover, and click carefully.</p>
-      <div class="mirror-wrapper">
-          <div class="original-image" title="original image"></div>
-          <div class="mirror-image" title="mirror image"></div>
-
-          <!-- Invisible clickable shard hidden in reflection -->
-          <div id="shard" class="mirror-shard" title="Hidden shard"></div>
+  <div class="mirror-wrap">
+    <div class="mirror-frame">
+      <div class="header">
+        <h1>M I R R O R</h1>
+        <p class="hint">Reflect. Replicate. Reward.</p>
       </div>
-      <div id="keyReveal" class="key-reveal" style="display:none;">
-        <p>✨ You found the hidden shard! ✨</p>
-        <h2>Key Part 4: <code>  {   T2mqqzyUSfzIH1e73kL2YKuOHZzgHux03jdL5DQs5TyG%2BV6jQkL3VzqEWz127y9C%0AjfqBxEU1AgMBAAECggEAB7aG2DzetAH3ZI2l0Eyc9IxkYqjmpXcslxf1o%2FMieZxx%0AC96IZ3dTHsOiVumvNu0WNJsoqqAJszNqCMhae3D253JusZ8T5C1zK%2FHQP2UJrDdW    }
-          <br> !NEXT CHALLENGE: https://encrypted-note-ctf.onrender.com/7e616b8425b61abdb010fb9117351f0d700585dd
-        </code></h2>
+
+      <div class="play-area">
+        <canvas id="mirrorCanvas"></canvas>
+        <div class="divider"></div>
+      </div>
+
+      <div class="controls">
+        <button id="resetBtn">RESET</button>
+        <span class="status">Draw anywhere (left OR right)</span>
+      </div>
+
+      <div id="revealBox" class="reveal-box" style="display:none;">
+        🔮 Mirror Key — PART 12 🔮<br/>
+        <code>aW1hZ2luZS1taXJyb3ItcGFydC0xMg==</code><br/>
+        NEXT → https://encrypted-note-ctf.onrender.com/YOUR_NEXT_PATH
       </div>
     </div>
-    <script>
-      const shard = document.getElementById('shard');
-      const keyReveal = document.getElementById('keyReveal');
-      shard.addEventListener('click', () => {
-        keyReveal.style.display = 'block';
-        shard.style.display = 'none';
-      });
-    </script>
+  </div>
+
+  <audio id="scribble" src="{{ url_for('static', filename='audio/scribble.wav') }}"></audio>
+  <audio id="matchSound" src="{{ url_for('static', filename='audio/match.m4a') }}"></audio>
+  <audio id="failSound" src="{{ url_for('static', filename='audio/fail.flac') }}"></audio>
+
+  <script src="{{ url_for('static', filename='js/mirror.js') }}"></script>
 </body>
 </html>
-
