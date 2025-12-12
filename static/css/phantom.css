@@ -14,7 +14,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url("https://i.ibb.co/h8D25w0/matrix-grid.jpg");
+  background-image: url("/static/img/phantom1.webp");
   background-size: cover;
   filter: brightness(30%) contrast(130%);
   z-index: -2;
