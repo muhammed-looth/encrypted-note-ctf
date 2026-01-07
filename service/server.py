@@ -1,13 +1,17 @@
 from datetime import datetime
-from flask import Flask, jsonify, abort, render_template, url_for, request, redirect, flash
+from flask import Flask, jsonify, abort, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin, login_user, login_required
+from werkzeug.security import generate_password_hash
 import os
 import time
-import time
 import json
+import threading
+import random
 
+# --------------------------------
+# App Setup
+# --------------------------------
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 app = Flask(
@@ -16,13 +20,16 @@ app = Flask(
     template_folder=os.path.join(BASE_DIR, 'templates')
 )
 
-
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+# --------------------------------
+# Database
+# --------------------------------
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(250), unique=True, nullable=False)
@@ -35,100 +42,118 @@ with app.app_context():
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
+# --------------------------------
+# Hardcoded Login (CTF Style)
+# --------------------------------
 VALID_USERNAME = "charlie"
-VALID_PASSWORD = "password@321"  # make it strong
+VALID_PASSWORD = "password@321"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-
-        # Hardcoded login check
-        if username == VALID_USERNAME and password == VALID_PASSWORD:
-            # Check if user exists in DB
-            user = User.query.filter_by(username=username).first()
-
-            # If not, create it (optional)
+        if (
+            request.form.get("username") == VALID_USERNAME
+            and request.form.get("password") == VALID_PASSWORD
+        ):
+            user = User.query.filter_by(username=VALID_USERNAME).first()
             if not user:
-                user = User(username=username, password=generate_password_hash(password))
+                user = User(
+                    username=VALID_USERNAME,
+                    password=generate_password_hash(VALID_PASSWORD)
+                )
                 db.session.add(user)
                 db.session.commit()
 
-            # Login the user
             login_user(user)
-
             return redirect("/matrix")
 
-        flash("ACCESS DENIED — INVALID CREDENTIALS")
-        return redirect("/")
-
+        flash("ACCESS DENIED")
     return render_template("login.html")
 
-
-@app.route('/matrix')
+@app.route("/matrix")
 @login_required
 def matrix():
-    return render_template('matrix.html')
+    return render_template("matrix.html")
 
+# --------------------------------
+# 🔥 RACE CONDITION SECTION
+# --------------------------------
 
-NOTES_DIR = './notes'
+NOTES_DIR = "./notes"
 
-# This is a mock global variable that could leak data in race
-average_response_time = 0
+# 🚨 SHARED GLOBAL STATE (INTENTIONALLY UNSAFE)
+leak_offset = 0
 
-@app.route('/notes/<int:note_id>')
+# 📏 RESPONSE SIZE TARGETS
+NORMAL_SIZE = 75
+SPECIAL_SIZE = 600
+
+@app.route("/notes/<int:note_id>")
 def get_note(note_id):
-    filename = os.path.join(NOTES_DIR, f'note_{note_id}.json')
+    global leak_offset
+
+    filename = os.path.join(NOTES_DIR, f"note_{note_id}.json")
     if not os.path.exists(filename):
         abort(404)
 
-    start_time = time.time()
+    start = time.time()
 
-    # Simulate race window
-    time.sleep(0.05)  # 50 ms window
+    # ⏳ Race window
+    time.sleep(0.03)
 
-    # During the sleep, suppose attacker replaces the file or alters it
-    with open(filename, 'r') as f:
+    with open(filename, "r") as f:
         data = json.load(f)
 
-    # Simulate leak: intentionally expose part of RSA encrypted key or plaintext
-    # e.g., send only part of the data based on response time
-    elapsed = time.time() - start_time
-    leak_factor = int(elapsed * 100) % 2  # Random partial leak based on timing
-
-
-        # -----------------------------
-    # 🔥 SPECIAL BEHAVIOR FOR NOTE ID 61
-    # -----------------------------
-    if note_id == 61:
-        # Add meaningless padding to artificially increase the response size
-        data["padding"] = "X" * 500  # Increase size by 500 bytes (adjust as needed)
-
-        # Optionally leak a larger preview to make it stand out
-        if leak_factor:
-            return jsonify({
-                "note_id": note_id,
-                "leak_preview": data.get("rsa_enc_key", "")[:50],  # leak more
-                "padding": data["padding"],
-                "msg": "partial leak"
-            })
-
+    secret = data.get("rsa_enc_key", "")
+    if not secret:
         return jsonify(data)
 
-    if leak_factor:
-        # Leak part of RSA encrypted key (simulate partial leak)
-        partial_response = {
-            'note_id': note_id,
-            'partial_rsa_enc_key': data.get('rsa_enc_key', '')[:10],  # first 10 chars
-            'leak': 'partial rsa key leak'
-        }
-        return jsonify(partial_response)
+    # 🚨 UNSAFE GLOBAL UPDATE (RACE)
+    leak_offset = (leak_offset + 7) % len(secret)
+
+    # ⏳ Second race window
+    time.sleep(0.01)
+
+    leaked_chunk = secret[leak_offset:leak_offset + 8]
+
+    # --------------------------------------------------
+    # 🎲 NON-DETERMINISTIC BEHAVIOR (IMPORTANT)
+    # --------------------------------------------------
+    # 30% chance → FULL NOTE returned
+    # 70% chance → PARTIAL LEAK (race condition)
+    return_full = random.randint(1, 10) <= 3
+
+    if return_full:
+        # FULL NOTE RESPONSE
+        response = data
     else:
-        # Return full data normally
-        return jsonify(data)
+        # PARTIAL LEAK RESPONSE
+        response = {
+            "note_id": note_id,
+            "leaked": leaked_chunk,
+            "offset": leak_offset,
+            "msg": "race condition leak"
+        }
 
+    # --------------------------------------------------
+    # 📏 RESPONSE SIZE SIDE-CHANNEL
+    # --------------------------------------------------
+    if note_id == 61:
+        target_size = SPECIAL_SIZE
+        pad_char = "X"
+    else:
+        target_size = NORMAL_SIZE
+        pad_char = "A"
+
+    current_size = len(json.dumps(response))
+    if current_size < target_size:
+        response["padding"] = pad_char * (target_size - current_size)
+
+    return jsonify(response)
+
+# --------------------------------
+# Static / Puzzle Routes (UNCHANGED)
+# --------------------------------
 
 @app.route('/bcc4d4f0381c74919db335641dc13b085bf1d0fd')
 def mazePage():
@@ -182,11 +207,9 @@ def error():
 def privacy():
     return render_template('privacy.html')
 
-
-
-
-
-
+# --------------------------------
+# Message Model (UNCHANGED)
+# --------------------------------
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender = db.Column(db.String(250), nullable=False)
@@ -194,6 +217,8 @@ class Message(db.Model):
     content = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+# --------------------------------
+# Run
+# --------------------------------
+if __name__ == "__main__":
+    app.run(threaded=True, debug=True, host="0.0.0.0")
